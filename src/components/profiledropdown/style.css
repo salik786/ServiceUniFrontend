@@ -1,0 +1,9 @@
+@import "rsuite/dist/rsuite.css";
+.rs-dropdown-toggle-caret{
+    display: none;
+}
+
+.rs-btn{
+    background-color:rgb(243, 239, 239); 
+    color: black !important;
+}
