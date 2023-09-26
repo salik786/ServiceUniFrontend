@@ -39,14 +39,9 @@ function BookAppointment() {
     return (
 
         <>
-         <Breadcrumbs links={[{name:"Pharmacy",path:"/pharmacy"},{name:"Consultation",path:"/consultation"},{name:"Book an Appointment",path:"/bookappointment"}]}/>
+            <Breadcrumbs links={[{ name: "Pharmacy", path: "/pharmacy" }, { name: "Consultation", path: "/consultation" }, { name: "Book an Appointment", path: "/bookappointment" }]} />
             <div>
 
-
-
-
-
-              
 
                 <div className="m-4"   >
                     <div className='bg-white p-4' style={{ height: "50vh" }}>
@@ -55,23 +50,23 @@ function BookAppointment() {
 
                                 <label for="Username" class="form-label bold text-black mr-4" style={{ fontWeight: "500 !important", marginRight: "20%" }}>GP</label>
                             </div>
-                            <div className='col-6'> 
+                            <div className='col-6'>
                                 <Dropdown class="form-control" options={options} onChange={handleSelect} value={defaultOption} placeholder="Select an option" />;
                             </div>
                         </div>
 
                         <div class="form-outline mb-4 d-flex w-100 row">
-                        <div className='col-2'>
-                            <label for="exampleInputPassword1" class="form-label text-black" style={{ fontWeight: "500 !important", marginRight: "18%" }}>Date</label>
-                          </div>
-                          <div className='col-4'>
-                            <div class="form-group  w-100">
-
-                                <div class="input-group " id="show_hide_password">
-                                    <input class="form-control border  w-50" type="date" />
-
-                                </div>
+                            <div className='col-2'>
+                                <label for="exampleInputPassword1" class="form-label text-black" style={{ fontWeight: "500 !important", marginRight: "18%" }}>Date</label>
                             </div>
+                            <div className='col-4'>
+                                <div class="form-group  w-100">
+
+                                    <div class="input-group " id="show_hide_password">
+                                        <input class="form-control border  w-50" type="date" />
+
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import {Link,Navigate} from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import "./style.css";
+import { toast } from "react-toastify"
+import useToast from '../../components/toast';
 function LoginPage() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     rememberMe: false,
   });
+  const { toastSuccess, toastError } = useToast()
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -15,7 +18,7 @@ function LoginPage() {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-  const [user,setUser]=useState({user:""})
+  const [user, setUser] = useState({ user: "" })
 
   const linkStyle = {
     textDecoration: 'none', // Remove underline
@@ -23,16 +26,18 @@ function LoginPage() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    sessionStorage.setItem("user","salik")
-   setUser({...user,user:"salik"});
+
+    toastSuccess("Successful Login")
+    sessionStorage.setItem("user", "salik")
+    setUser({ ...user, user: "salik" });
     // Access formData.username, formData.password, and formData.rememberMe for your login logic.
   };
 
   return (
     <>
-            {user.user && (
-          <Navigate to="/dashboard" replace={true} />
-        )}
+      {user.user && (
+        <Navigate to="/dashboard" replace={true} />
+      )}
 
       <section class="" style={{ backgroundColor: "#eee" }}>
         <div class="container py-5 h-100">

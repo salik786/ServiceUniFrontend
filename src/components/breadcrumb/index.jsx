@@ -8,16 +8,16 @@ function Breadcrumbs({ links }) {
     return (
 
         <nav className="m-4">
-            {links.length>0?links.map((item, index) => {
-                return(<>
+            {links.length > 0 ? links.map((item, index) => {
+                return (<>
                     <Link to={item.path}
                         className={location.pathname === item.path ? "breadcrumb-active" : "breadcrumb-not-active"}
                     >
-                        {item.name}  
+                        {item.name}
                     </Link>
-                    {links.length<index?<></>:<span className="breadcrumb-arrow">&gt;</span>}
+                    {links.length - 1 == index ? <></> : <span className="breadcrumb-arrow">&gt;</span>}
                 </>)
-            }):<></>
+            }) : <></>
             }
 
         </nav>
