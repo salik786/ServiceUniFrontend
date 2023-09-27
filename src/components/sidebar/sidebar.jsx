@@ -5,7 +5,7 @@ import { faUser, faBars, faGraduationCap, faCapsules, faBook, faVolleyball, faBu
 import { LuLayoutDashboard } from "react-icons/lu"
 import { GiMedicines } from "react-icons/gi"
 import { PiStudentBold } from "react-icons/pi"
-import { FiBookOpen } from "react-icons/fi"
+import { FiBookOpen, FiSettings } from "react-icons/fi"
 import { BsBuildingFillCheck } from "react-icons/bs"
 import { MdSportsVolleyball } from "react-icons/md"
 import ToggleNavbar from './toggleNavbar';
@@ -82,9 +82,9 @@ function Sidebar() {
 
 
                     <li style={{ marginTop: "200px" }}>
-                    <NavLink to={"/settings"}><span class=" mr-4">
-                            <FontAwesomeIcon icon={faGear} />
-                        </span>Settings</NavLink>
+                        <NavLink to={"/settings"} className={`link ${location.pathname == "/settings" ? "active-nav" : "inactive-nav"}`}>
+                            <span className='nav_icon'><FiSettings fontSize={fontSize} /></span>
+                            <span className='nav_text'>Settings</span></NavLink>
                     </li>
 
                     <li onClick={handleLogout}>

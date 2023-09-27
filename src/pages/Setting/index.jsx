@@ -18,9 +18,9 @@ function Settings() {
                     Account settings
                 </h4>
 
-                <div class="card overflow-hidden">
+                <div class=" overflow-hidden bg-white">
                     <div class="row no-gutters row-bordered row-border-light">
-                        
+
                         <div class="col-md-12">
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="account-general">
@@ -39,32 +39,29 @@ function Settings() {
                                     <hr class="border-light m-0" />
 
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label class="form-label">Username</label>
-                                            <input type="text" class="form-control mb-1" value="nmaxwell" />
+                                        <div class="form-group mb-4">
+                                            <label class="form-label ml-1">Username</label>
+                                            <input type="text" class="form-control mb-1 border" value="nmaxwell" />
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Name</label>
-                                            <input type="text" class="form-control" value="Nelle Maxwell" />
+                                        <div class="form-group  mb-4">
+                                            <label class="form-label ml-1">Name</label>
+                                            <input type="text" class="form-control border" value="Nelle Maxwell" />
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">E-mail</label>
-                                            <input type="text" class="form-control mb-1" value="nmaxwell@mail.com" />
+                                        <div class="form-group  mb-4">
+                                            <label class="form-label ml-1">E-mail</label>
+                                            <input type="text" class="form-control mb-1 border" value="nmaxwell@mail.com" />
 
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Company</label>
-                                            <input type="text" class="form-control" value="Company Ltd." />
+                                        <div class="form-group  mb-4">
+                                            <label class="form-label ml-1">Student ID</label>
+                                            <input type="text" class="form-control border" value="Company Ltd." />
+                                        </div>
+                                        <div class="d-flex justify-content-end mt-4 mb-3 ml-3">
+                                            <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+                                            <button type="button" class="btn border-secondary">Cancel</button>
                                         </div>
                                     </div>
 
-                                </div>
-                                <div class="tab-pane fade" id="account-change-password">
-                                    <div class="card-body pb-2">
-
-
-
-                                    </div>
                                 </div>
 
 
@@ -73,10 +70,7 @@ function Settings() {
                     </div>
                 </div>
 
-                <div class="text-right mt-3">
-                    <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-                    <button type="button" class="btn btn-default">Cancel</button>
-                </div>
+
 
             </div>
         </>

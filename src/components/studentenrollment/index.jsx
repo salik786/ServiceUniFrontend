@@ -51,7 +51,7 @@ function Enrollment() {
                         <div className="col-lg-10 col-xl-10 col-sm-4">
                             <h3 className='bold'>  Enrollment </h3>
                         </div>
-                        <div className="col-2">
+                        <div className="col-lg-2">
                             <button className='btn btn-primary'>Fee Structure</button>
                         </div>
                         <hr className='mt-3' />

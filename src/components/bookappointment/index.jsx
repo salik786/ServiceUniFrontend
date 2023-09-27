@@ -34,18 +34,18 @@ function BookAppointment() {
     return (
 
         <>
-            <Breadcrumbs links={[{ name: "Pharmacy", path: "/pharmacy" }, { name: "Consultation", path: "/consultation" }, { name: "Book an Appointment", path: "/bookappointment" }]} />
+            <Breadcrumbs links={[{ name: "Pharmacy", path: "/pharmacy" }, { name: "Consultation", path: "/appointment" }, { name: "Book an Appointment", path: "/bookappointment" }]} />
             <div>
 
 
                 <div className="m-4"   >
                     <div className='bg-white p-4' style={{ height: "50vh" }}>
                         <div class="form-outline mb-4 d-flex w-100 row">
-                            <div className='col-2'>
+                            <div className='col-lg-2'>
 
                                 <label for="Username" class="form-label bold text-black mr-4" style={{ fontWeight: "500 !important", marginRight: "20%" }}>GP</label>
                             </div>
-                            <div className='col-6'>
+                            <div className='col-lg-6'>
                                 <SearchableDropdown
                                     options={animals}
                                     label="name"
@@ -58,10 +58,10 @@ function BookAppointment() {
                         </div>
 
                         <div class="form-outline mb-4 d-flex w-100 row">
-                            <div className='col-2'>
+                            <div className='col-lg-2 col-md-12 col-sm-12'>
                                 <label for="exampleInputPassword1" class="form-label text-black" style={{ fontWeight: "500 !important", marginRight: "18%" }} >Date</label>
                             </div>
-                            <div className='col-4'>
+                            <div className='col-lg-4 col-md-12 col-sm-12'>
                                 <div class="form-group  w-100">
 
                                     <div class="input-group " id="show_hide_password">
@@ -70,7 +70,7 @@ function BookAppointment() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='col-4'>
+                            <div className='col-lg-4'>
                                 <div class="form-group  w-100">
 
                                     <div class="input-group " id="show_hide_password">
@@ -81,10 +81,10 @@ function BookAppointment() {
                             </div>
                         </div>
                         <div class="form-outline mb-4 d-flex w-100 row">
-                            <div className='col-2'>
+                            <div className='col-lg-2'>
                                 <label for="exampleInputPassword1" class="form-label text-black" style={{ fontWeight: "500 !important", marginRight: "18%" }}>Availabilty</label>
                             </div>
-                            <div className='col-4'>
+                            <div className='col-lg-4'>
                                 <div class="form-group  w-100">
 
                                     <div class="input-group " id="show_hide_password">
@@ -96,13 +96,13 @@ function BookAppointment() {
 
                         </div>
 
-                        <div className='d-flex w-100 justify-content-end' style={{ marginTop: "15vh" }}>
-                            <div class="mt-4 " style={{ width: "12%", marginRight: "15px" }}>
+                        <div className='d-flex w-100 justify-content-end' style={{ marginTop: "10%" }}>
+                            <div class="mt-4 " style={{ width: "150px", marginRight: "15px" }}>
                                 <button class="btn btn-primary border border-primary w-100" onClick={handleSubmit}>
                                     Submit
                                 </button>
                             </div>
-                            <div class="mt-4 " style={{ width: "12%" }}>
+                            <div class="mt-4 " style={{ width: "150px" }}>
                                 <button class="btn btn-outline-secondary border border-secondary w-100" >
                                     Cancel
                                 </button>

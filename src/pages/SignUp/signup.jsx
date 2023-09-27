@@ -11,11 +11,11 @@ function SignupPage() {
         confirmPassword: '',
     });
     const [errors, setErrors] = useState({
-        firstName: 'first name is mandatory *',
+        firstName: '',
         lastName: '',
-        email: 'email is mandatory *',
-        studentID: 'student id is mandatory *',
-        password: 'password is mandatory *',
+        email: '',
+        studentID: '',
+        password: '',
         confirmPassword: '',
     });
     const handleInputChange = (e) => {
@@ -58,7 +58,7 @@ function SignupPage() {
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col-xl-10">
 
-                            <div class="card rounded-3 text-black">
+                            <div class="rounded-3 text-black bg-white">
 
                                 <div class="row g-0">
 
@@ -79,18 +79,18 @@ function SignupPage() {
                                     {/* <!--Right side --> */}
                                     <div class="col-lg-6">
                                         <div class="card-body p-md-5 mx-md-4">
-
-                                            <h5 style={{ fontWeight: "600" }}>Get Started</h5>
-                                            <p style={{ fontSize: "14px !important; " }} class="text-muted lh-lg">Create your account now.</p>
-
+                                            <div className='mb-4'>
+                                                <h2>Get Started</h2>
+                                                <p style={{ fontSize: "15px !important; " }} class="text-muted lh-lg">Create your account now.</p>
+                                            </div>
                                             <form>
 
 
                                                 <div class="form-outline mb-4">
-                                                    <label for="exampleInputEmail1" class="form-label "  >First Name</label>
+                                                    <label for="exampleInputEmail1" class="form-label "  >First Name*</label>
                                                     <input
                                                         type="text"
-                                                        class="form-control"
+                                                        class="form-control border"
                                                         id="FirstName"
                                                         name="firstName"
                                                         value={formData.firstName}
@@ -105,7 +105,7 @@ function SignupPage() {
                                                     <label for="exampleInputEmail1" class="form-label"  >Last Name</label>
                                                     <input
                                                         type="text"
-                                                        class="form-control"
+                                                        class="form-control border"
                                                         id="LastName"
                                                         name="lastName"
                                                         value={formData.lastName}
@@ -119,7 +119,7 @@ function SignupPage() {
                                                     <label for="exampleInputEmail1" class="form-label"  >Email </label>
                                                     <input
                                                         type="email"
-                                                        class="form-control"
+                                                        class="form-control border"
                                                         id="email"
                                                         name="email"
                                                         value={formData.email}
@@ -133,7 +133,7 @@ function SignupPage() {
                                                     <label for="exampleInputpassword" class="form-label"  >Student ID</label>
                                                     <input
                                                         type="text"
-                                                        class="form-control"
+                                                        class="form-control border"
                                                         id="studentID"
                                                         name="studentID"
                                                         value={formData.studentID}
@@ -147,9 +147,10 @@ function SignupPage() {
                                                     <label for="exampleCpassword" class="form-label"  >Password</label>
                                                     <input
                                                         type="password"
-                                                        class="form-control"
+                                                        class="form-control border"
                                                         id="password"
                                                         name="password"
+                                                        placeholder='**************'
                                                         value={formData.password}
                                                         onChange={handleInputChange}
                                                     />
@@ -161,7 +162,8 @@ function SignupPage() {
                                                     <label for="exampleInputEmail1" class="form-label fs-6"  >Confirm Password</label>
                                                     <input
                                                         type="password"
-                                                        class="form-control"
+                                                        class="form-control border"
+                                                        placeholder='**************'
                                                         id="confirmPassword"
                                                         name="confirmPassword"
                                                         value={formData.confirmPassword}
@@ -171,9 +173,9 @@ function SignupPage() {
 
                                                 </div>
 
-                                                <div class="text-center pt-1 mb-5 pb-1">
-                                                    <button type="button" class="btn btn-outline-secondary px-5 btn-lg" style={{ fontSize: '14px' }}>Cancel</button>
-                                                    <button type="button" class="btn btn-primary px-5 btn-lg" style={{ fontSize: '14px' }} onClick={handleSubmit}>Submit</button>
+                                                <div class="d-flex justify-content-end pt-1 mb-5 pb-1 mt-4">
+
+                                                    <button type="button" class="btn btn-outline-primary px-5 btn-lg w-100 border-primary m" style={{ fontSize: '16px' }} onClick={handleSubmit}>Register</button>
 
                                                 </div>
 

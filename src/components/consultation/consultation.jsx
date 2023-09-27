@@ -36,10 +36,10 @@ function Consultation() {
     return (
 
         <>
-        
+
             <section>
                 <div class="main-content w-100 h-  px-5">
-                <Breadcrumbs links={[{name:"Pharmacy",path:"/pharmacy"},{name:"Consultation",path:"/consultation"},{name:"Appointment",path:"/appointment"}]}/>
+                    <Breadcrumbs links={[{ name: "Pharmacy", path: "/pharmacy" }, { name: "Consultation", path: "/pharmacy" }, { name: "Appointment", path: "/appointment" }]} />
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-4 col-md-6 ">
@@ -66,16 +66,18 @@ function Consultation() {
                         </div>
                         <div class="row mt-5">
                             <div class="col-lg-4 col-md-6">
-                                <div class="card" style={{ width: "18rem" }}>
-                                    <div class="card-body text-center mt-4">
-                                        <span><GiMedicines size={25} /></span>
+                                <Link to="/dispencing">
+                                    <div class="card" style={{ width: "18rem" }}>
+                                        <div class="card-body text-center mt-4">
+                                            <span><GiMedicines size={25} /></span>
 
-                                        <p class="main_text">
-                                            Dispencing
-                                        </p>
+                                            <p class="main_text">
+                                                Dispencing
+                                            </p>
 
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
 
                             </div>
                             <div class="col-lg-4 col-md-6">
