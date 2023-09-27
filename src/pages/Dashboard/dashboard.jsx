@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate, Routes,Route } from "react-router-dom"
+import { Link, Navigate, Routes, Route } from "react-router-dom"
 import "./style.css"
 import Sidebar from '../../components/sidebar/sidebar';
 import RSidebar from '../../components/rsidebar/rsidebar';
@@ -11,6 +11,8 @@ import ViewAppointment from '../../components/viewappointment';
 import BookAppointment from '../../components/bookappointment';
 import Enrollment from '../../components/studentenrollment';
 import Settings from '../Setting';
+import Dispensing from '../../sections/dispencing';
+import ViewCart from '../../sections/cart';
 function Dashboard() {
     const [formData, setFormData] = useState({
         username: '',
@@ -45,29 +47,31 @@ function Dashboard() {
 
                 <Sidebar />
                 <div id="content" class="" style={{ color: "rgb(241 244 253) !important" }}>
-               
-                <TopBar />
-                <Routes>
-               
-               <Route path="/Dashboard" element={<RSidebar />} />
 
-                   <Route path="/enrollment" element={<Enrollment />} />
-                   <Route path="/settings" element={<Settings />} />
-                   <Route path="/studentcentral" element={<Enrollment />} />
-                   <Route path="/pharmacy" element={<Pharmacy />} />
-                   <Route path="/appointment" element={<Consultation />} />
-                   <Route path="/bookappointment" element={<BookAppointment />} />
-                   <Route path="/viewappointment" element={<ViewAppointment />} />
-               </Routes>
+                    <TopBar />
+                    <Routes>
+
+                        <Route path="/Dashboard" element={<RSidebar />} />
+
+                        <Route path="/enrollment" element={<Enrollment />} />
+                        <Route path="/viewcart" element={<ViewCart />} />
+                        <Route path="/settings" element={<Settings />} />
+                        <Route path="/studentcentral" element={<Enrollment />} />
+                        <Route path="/dispencing" element={<Dispensing />} />
+                        <Route path="/pharmacy" element={<Pharmacy />} />
+                        <Route path="/appointment" element={<Consultation />} />
+                        <Route path="/bookappointment" element={<BookAppointment />} />
+                        <Route path="/viewappointment" element={<ViewAppointment />} />
+                    </Routes>
+                </div>
+
+
+
+
             </div>
-               
-                
-                
-               
-            </div>
 
 
-         
+
 
         </>
     );

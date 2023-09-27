@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./style.css";
+import { Link } from 'react-router-dom';
 function SignupPage() {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -16,7 +17,7 @@ function SignupPage() {
         studentID: 'student id is mandatory *',
         password: 'password is mandatory *',
         confirmPassword: '',
-      });
+    });
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -26,7 +27,7 @@ function SignupPage() {
         setErrors({
             ...errors,
             [name]: '',
-          });
+        });
     };
 
     const handleSubmit = (e) => {
@@ -35,16 +36,16 @@ function SignupPage() {
         const validationErrors = {};
         if (!formData.email) {
             validationErrors.email = 'Email is required';
-          }
-      
-          // Perform other validation checks for other fields
-          // ...
-      
-          // If there are errors, update the error state and prevent submission
-          if (Object.keys(validationErrors).length > 0) {
+        }
+
+        // Perform other validation checks for other fields
+        // ...
+
+        // If there are errors, update the error state and prevent submission
+        if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
-          }
+        }
         console.log(formData);
         // Perform further actions (e.g., validation, API calls)
     };
@@ -96,8 +97,8 @@ function SignupPage() {
                                                         onChange={handleInputChange}
                                                         placeholder="John"
                                                     />
-                                                      {errors.firstName && <div className="text-danger">{errors.firstName}</div>}
-        
+                                                    {errors.firstName && <div className="text-danger">{errors.firstName}</div>}
+
                                                 </div>
 
                                                 <div class="form-outline mb-4">
@@ -111,8 +112,8 @@ function SignupPage() {
                                                         onChange={handleInputChange}
                                                         placeholder="Doe"
                                                     />
-                                                      {errors.lastName && <div className="text-danger">{errors.lastName}</div>}
-       
+                                                    {errors.lastName && <div className="text-danger">{errors.lastName}</div>}
+
                                                 </div>
                                                 <div class="form-outline mb-4">
                                                     <label for="exampleInputEmail1" class="form-label"  >Email </label>
@@ -125,8 +126,8 @@ function SignupPage() {
                                                         onChange={handleInputChange}
                                                         placeholder="johndoe@gmail.com"
                                                     />
-                                                      {errors.email && <div className="text-danger">{errors.email}</div>}
-       
+                                                    {errors.email && <div className="text-danger">{errors.email}</div>}
+
                                                 </div>
                                                 <div class="form-outline mb-4">
                                                     <label for="exampleInputpassword" class="form-label"  >Student ID</label>
@@ -139,8 +140,8 @@ function SignupPage() {
                                                         onChange={handleInputChange}
                                                         placeholder="EM167543"
                                                     />
-                                                      {errors.studentID && <div className="text-danger">{errors.studentID}</div>}
-       
+                                                    {errors.studentID && <div className="text-danger">{errors.studentID}</div>}
+
                                                 </div>
                                                 <div class="form-outline mb-4">
                                                     <label for="exampleCpassword" class="form-label"  >Password</label>
@@ -152,8 +153,8 @@ function SignupPage() {
                                                         value={formData.password}
                                                         onChange={handleInputChange}
                                                     />
-                                                      {errors.password && <div className="text-danger">{errors.password}</div>}
-       
+                                                    {errors.password && <div className="text-danger">{errors.password}</div>}
+
                                                 </div>
 
                                                 <div class="form-outline mb-4">
@@ -166,8 +167,8 @@ function SignupPage() {
                                                         value={formData.confirmPassword}
                                                         onChange={handleInputChange}
                                                     />
-                                                      {errors.confirmPassword && <div className="text-danger">{errors.confirmPassword}</div>}
-       
+                                                    {errors.confirmPassword && <div className="text-danger">{errors.confirmPassword}</div>}
+
                                                 </div>
 
                                                 <div class="text-center pt-1 mb-5 pb-1">
@@ -178,7 +179,7 @@ function SignupPage() {
 
                                                 <div class="d-flex align-items-center justify-content-center pb-4">
                                                     <p class="mb-0 me-2 text-muted">Alraedy have an account ?</p>
-                                                    <button type="button" class="btn btn-outline-primary">Sign in</button>
+                                                    <Link to="/login"><button type="button" class="btn btn-outline-primary">Sign in</button></Link>
                                                 </div>
 
                                             </form>

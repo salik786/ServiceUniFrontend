@@ -19,7 +19,7 @@ const useToast = () => {
         toast.success(message, ToastOptions)
     }
     const toastError = (message) => {
-        toast.success(message, ToastOptions)
+        toast.error(message, ToastOptions)
     }
 
     return { toastSuccess, toastError }
