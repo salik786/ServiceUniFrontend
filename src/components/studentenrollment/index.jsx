@@ -3,6 +3,7 @@ import { Link, Navigate, Routes, Route, useLocation, NavLink } from "react-route
 
 import { FiSearch } from "react-icons/fi"
 import { BiDownArrowAlt } from "react-icons/bi"
+import { AiOutlinePlusCircle } from "react-icons/ai"
 import Breadcrumbs from '../breadcrumb';
 import useToast from '../toast';
 import SearchableDropdown from '../search';
@@ -79,7 +80,7 @@ function Enrollment() {
 
                             </form>
                         </div>
-                        <div className='col-lg-2  col-sm-12 col-md-4' ><button className='btn btn-outline-primary' onClick={handleAddSubject}>Add Subject</button></div>
+                        <div className='col-lg-2  col-sm-12 col-md-4' ><button className='btn btn-outline-primary' onClick={handleAddSubject}><AiOutlinePlusCircle size={20} /><span>Add Subject</span></button></div>
                     </div>
                     <div className='row  mt-4 '>
 
