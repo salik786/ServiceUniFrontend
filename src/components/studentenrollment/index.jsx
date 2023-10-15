@@ -1,43 +1,133 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, Routes, Route, useLocation, NavLink } from "react-router-dom"
 
-import { FiSearch } from "react-icons/fi"
-import { BiDownArrowAlt } from "react-icons/bi"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import Breadcrumbs from '../breadcrumb';
-import useToast from '../toast';
+
 import SearchableDropdown from '../search';
+import { StudentEnrollment } from '../../api/enrollment';
+import useToast from '../Toast';
 
 function Enrollment() {
     const { toastSuccess, toastError } = useToast()
-    const { pathname } = useLocation();
     const [value, setValue] = useState("");
-    const [subjectList, setSubjectList] = useState([{
-        id: 1, title: "Service Oriented Software Design", code: "CSIT889"
-    }, {
-        id: 2, title: "Database Management ", code: "CSIT882"
-    }, {
-        id: 3, title: "Web Development", code: "CSIT884"
-    }])
-    const animals = [
+    const [subjectList, setSubjectList] = useState([])
+    const [selectedSubject, setSelectedSubject] = useState("")
+    const [newSubject, setNewSubject] = useState("")
+    const [animals, setAnimal] = useState([
         { id: 1, name: "Graspus graspus" },
         { id: 2, name: "Grus rubicundus" },
         { id: 3, name: "Speothos vanaticus" },
         { id: 4, name: "Charadrius tricollaris" },
         { id: 5, name: "Sciurus vulgaris" },
         { id: 6, name: "Ateles paniscus" },
-        { id: 7, name: "Bucorvus leadbeateri" }]
-    useEffect(() => {
-        console.log(pathname)
-    }, [pathname])
-    const handleAddSubject = () => {
-        if (true) {
-            toastSuccess("Subject Successfully Added")
+        { id: 7, name: "Bucorvus leadbeateri" }])
+
+    const handleAddSubject = async () => {
+        console.log("subjectttt-------->", value)
+        if (selectedSubject && sessionStorage.getItem("user")) {
+            let user = JSON.parse(sessionStorage.getItem("user"))
+            console.log("animalss", animals)
+            console.log("selectttttt", selectedSubject)
+            let selectedSubjectNew = animals.filter((item) => item.name == selectedSubject)
+            console.log("newSubject", selectedSubjectNew)
+            // now check for selected subject if already present in user enrollment
+            if (subjectList.length > 0) {
+                let checkSubject = subjectList.filter((item) => item.name == selectedSubject)
+
+                if (checkSubject.length > 0) {
+                    toastError("You are Already Enrolled in this Subject")
+                }
+                else {
+                    let resp = await StudentEnrollment.add_enrollment(selectedSubjectNew[0].id)
+                    if (resp.data && resp.data.message) {
+                        toastSuccess(resp.data.message)
+                    }
+                    else {
+                        toastError(resp.data.error)
+                    }
+                    console.log("resp", resp)
+                    getEnrolledSubjects()
+                }
+
+            }
+
+
+            else {
+                let resp = await StudentEnrollment.add_enrollment(selectedSubjectNew[0].id)
+                console.log("resp", resp)
+                if (resp) {
+                    if (resp.data && resp.data.message) {
+                        toastSuccess(resp.data.message)
+                    }
+                    else {
+                        toastError(resp.data.error)
+                    }
+                }
+                getEnrolledSubjects()
+            }
+
+
+
+
+
+            // setNewSubject(subjectList)
         }
         else {
+            toastError("Select Subject to Enroll")
+        }
 
 
-            toastError("Unable to Add Subjects")
+    }
+    const handleChange = (val) => {
+        console.log("selected subject", val)
+        setValue(val)
+        setSelectedSubject(val)
+    }
+    useEffect(() => {
+        getSubjects()
+
+
+    }, [])
+    useEffect(() => {
+        getEnrolledSubjects()
+    }, [])
+    const getEnrolledSubjects = async () => {
+        let resp = await StudentEnrollment.view_enrolled_subjects()
+        if (resp?.data) {
+            setSubjectList(resp.data)
+            // setSelectedSubject(resp.data)
+            console.log("dataaaa", resp.data)
+        }
+    }
+    const getSubjects = async () => {
+        try {
+
+
+            let resp = await StudentEnrollment.view_subjects()
+            // if (resp?.data) {
+            console.log("dataaaa", resp.data)
+            // let subjectcode = "";
+            // let re = /\((.*)\)/;
+            // let subjectname = "";
+            // let newArray = []
+            // console.log("resppppp", resp.data.length)
+            // for (let i = 0; i < resp.data.length; i++) {
+            //     let newObj = {}
+            //     newObj.id = i + 1;
+            //     newObj.code = resp.data[i].name.match(re)[1];
+            //     newObj.name = resp.data[i].name.replace(/ *\([^)]*\) */g, "");
+            //     newArray.push(newObj)
+            //     console.log("new obj", newObj)
+
+            // }
+            // setSubjectList(resp.data)
+            setAnimal(resp.data)
+            // console.log("response", newArray)
+            // }
+        }
+        catch (e) {
+
         }
     }
     return (
@@ -72,7 +162,7 @@ function Enrollment() {
                                         class="w-100"
                                         id="id"
                                         selectedVal={value}
-                                        handleChange={(val) => setValue(val)}
+                                        handleChange={handleChange}
                                     />
                                     {/* <div className='col-2'><BiDownArrowAlt></BiDownArrowAlt></div> */}
 
@@ -80,48 +170,55 @@ function Enrollment() {
 
                             </form>
                         </div>
-                        <div className='col-lg-2  col-sm-12 col-md-4' ><button className='btn btn-outline-primary' onClick={handleAddSubject}><AiOutlinePlusCircle size={20} /><span>Add Subject</span></button></div>
+                        <div className='col-lg-2  col-sm-12 col-md-4' ><button className="btn btn-outline-primary" onClick={handleAddSubject}><span>Add Subject</span></button></div>
                     </div>
                     <div className='row  mt-4 '>
 
                         <h4 className='mb-3'>Existing Subjects</h4>
                         <div className=''>
-                            <table className='table table-bordered border vertical  '>
-                                <thead>
-                                    <tr >
-                                        <th scope="col" className='p-3'>#</th>
-                                        <th scope='col' className='p-3'>
-                                            Subject Title
-                                        </th>
-                                        <th scope='col' className='p-3'>
-                                            Subject Code
-                                        </th>
+                            {subjectList.length > 0 ? <>
+                                <table className='table table-bordered border vertical  '>
+                                    <thead>
+                                        <tr >
+                                            <th scope="col" className='p-3'>#</th>
+                                            <th scope='col' className='p-3'>
+                                                Subject name
+                                            </th>
+                                            <th scope='col' className='p-3'>
+                                                Subject Code
+                                            </th>
+                                            <th scope='col' className='p-3'>
+                                                Instructor
+                                            </th>
 
-                                    </tr>
-                                </thead>
+                                        </tr>
+                                    </thead>
 
-                                <tbody>
-                                    {subjectList.map((item, index) => {
-                                        return (
-                                            <>
-                                                <tr className='' key={index}>
-                                                    <td className='p-4'>{item.id}</td>
-                                                    <td className='p-4'>{item.title} </td>
+                                    <tbody>
 
-                                                    <td className='p-4'>{item.code} </td>
+                                        {subjectList.map((item, index) => {
+                                            return (
+                                                <>
+                                                    <tr className='' key={index}>
+                                                        <td className='p-4'>{index + 1}</td>
+                                                        <td className='p-4'>{item.name} </td>
 
-                                                </tr>
-                                            </>
-                                        )
+                                                        <td className='p-4'>{item.subject_code} </td>
+                                                        <td className='p-4'>{item.details} </td>
 
-                                    })}
+                                                    </tr>
+                                                </>
+                                            )
 
-
-
-                                </tbody>
+                                        })}
 
 
-                            </table>
+                                    </tbody>
+
+
+                                </table>
+                            </>
+                                : <p className='text-center'>No Subjects Found in Enrolment</p>}
                         </div>
                     </div>
                     <div className='row'>

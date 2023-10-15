@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faUserGraduate, faBars, faCircleUser, faBell, faVolleyball, faBuilding, faBook, faRightFromBracket, faCapsules } from '@fortawesome/free-solid-svg-icons'
+import React, { useEffect, useState } from 'react';
 import { AiOutlineMedicineBox } from "react-icons/ai"
 import { BiInjection } from "react-icons/bi"
 import { GiMedicines } from "react-icons/gi"
-
+import { ProductAPI } from '../../api/consultation';
 import { NavLink } from 'react-router-dom';
 import Breadcrumbs from '../../components/breadcrumb';
 
@@ -15,6 +12,7 @@ function Pharmacy() {
         password: '',
         rememberMe: false,
     });
+
 
 
     return (

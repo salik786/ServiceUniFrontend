@@ -10,23 +10,7 @@ import { GiMedicines } from "react-icons/gi"
 import Breadcrumbs from '../breadcrumb';
 
 function Consultation() {
-    const [Routing, setRouting] = useState({
-        Dashboard: { key: '/dashboard', show: false },
-        Pharmacy: {
 
-            key: '/pharmacy', show: false, nestedRoute: {
-                listmedicines: { key: '/listmedicine', show: false },
-                cart: { key: '/cart', show: false }
-            },
-            StudentsCenter: {
-                key: '/students', show: false, nestedRoute: {
-                    listcourses: { key: '/listcourses', show: false },
-                    showcourses: { key: '/showcourses', show: false }
-                },
-            }
-        },
-        rememberMe: false,
-    });
     const { pathname } = useLocation();
     // console.log("path÷name",pathname)
     useEffect(() => {

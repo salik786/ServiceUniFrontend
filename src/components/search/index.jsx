@@ -35,6 +35,7 @@ const SearchableDropdown = ({
     };
 
     const filter = (options) => {
+
         return options.filter(
             (option) => option[label].toLowerCase().indexOf(query.toLowerCase()) > -1
         );
@@ -49,7 +50,7 @@ const SearchableDropdown = ({
                         type="text"
                         value={getDisplayValue()}
                         name="searchTerm"
-                        placeholder="Search..."
+                        placeholder="Select"
                         onChange={(e) => {
                             setQuery(e.target.value);
                             handleChange(null);

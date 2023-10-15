@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faBars, faGraduationCap, faCapsules, faBook, faVolleyball, faBuilding, faGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { LuLayoutDashboard } from "react-icons/lu"
 import { GiMedicines } from "react-icons/gi"
+import { redirect } from 'react-router-dom';
 import { PiStudentBold } from "react-icons/pi"
 import { FiBookOpen, FiSettings } from "react-icons/fi"
 import { BsBuildingFillCheck } from "react-icons/bs"
@@ -42,6 +43,7 @@ function Sidebar() {
         sessionStorage.removeItem("user")
         navigate("/Login");
 
+
         // Access formData.username, formData.password, and formData.rememberMe for your login logic.
     };
     return (
@@ -67,7 +69,7 @@ function Sidebar() {
                                 <NavLink to={item.path} key={index} className={`link ${location.pathname == item.path ? "active-nav" : "inactive-nav"}`} >
                                     <span className='nav_icon'>{item.icon}</span>
 
-                                    <span className='nav_text'>{item.name}</span>
+                                    <span className='nav_text mt-2'>{item.name}</span>
                                 </NavLink>
                             </li>
 
@@ -84,7 +86,7 @@ function Sidebar() {
                     <li style={{ marginTop: "200px" }}>
                         <NavLink to={"/settings"} className={`link ${location.pathname == "/settings" ? "active-nav" : "inactive-nav"}`}>
                             <span className='nav_icon'><FiSettings fontSize={fontSize} /></span>
-                            <span className='nav_text'>Settings</span></NavLink>
+                            <span className='nav_text mt-2'>Settings</span></NavLink>
                     </li>
 
                     <li onClick={handleLogout}>

@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import "./style.css";
 import { Link } from 'react-router-dom';
+import { User } from '../../api/usermanage';
+import { toast } from 'react-toastify';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+// import { useToast } from "../../components/toast/index"
 function SignupPage() {
+
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
-        studentID: '',
-        password: '',
-        confirmPassword: '',
+        id: '',
+        password: ''
     });
     const [errors, setErrors] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
-        studentID: '',
+        id: '',
         password: '',
         confirmPassword: '',
     });
@@ -29,25 +33,63 @@ function SignupPage() {
             [name]: '',
         });
     };
-
-    const handleSubmit = (e) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword2, setShowPassword2] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+    const toggleConfirmPasswordVisibility = () => {
+        setShowPassword2(!showPassword2);
+    };
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // You can access form data in the `formData` state
-        const validationErrors = {};
-        if (!formData.email) {
-            validationErrors.email = 'Email is required';
-        }
+        if (Object.keys(errors).length > 0) {
+            const validationErrors = {};
+            if (!formData.first_name) {
+                validationErrors.first_name = 'first name is required';
+            }
 
-        // Perform other validation checks for other fields
-        // ...
+            if (!formData.last_name) {
+                validationErrors.last_name = 'last name is required';
+            }
+            if (!formData.email) {
+                validationErrors.email = 'email is required';
+            }
 
-        // If there are errors, update the error state and prevent submission
-        if (Object.keys(validationErrors).length > 0) {
+            if (!formData.id) {
+                validationErrors.id = 'student id is required';
+            }
+            if (!formData.password) {
+                validationErrors.password = 'password is required';
+            }
+            if (!formData.confirmPassword) {
+                validationErrors.confirmPassword = 'confirm password is required';
+            }
+            if (formData.password !== formData.confirmPassword) {
+                validationErrors.confirmPassword = 'password and confirm password should be same';
+            }
+
             setErrors(validationErrors);
             return;
         }
-        console.log(formData);
-        // Perform further actions (e.g., validation, API calls)
+        try {
+            let responce = await User.register(formData)
+            console.log("register api call response", responce)
+            if (responce.error) {
+                for (let item in responce.data) {
+                    console.log(responce.data[item][0])
+                    toast.error(responce.data[item][0])
+                }
+            }
+            else {
+                toast.success("You are successfully registered , go to Login page ")
+            }
+        }
+        catch (e) {
+            console.log("error-->>", e)
+        }
+
     };
 
 
@@ -71,7 +113,7 @@ function SignupPage() {
                                             </button>
                                             <div class="text-bottom   ">
                                                 <h2 style={{ fontWeight: "600!important" }}>
-                                                    Lorem ipsum dolor sit amet consecteturit sit purus fames sit....
+                                                    UNIVERSITY OF WOLLONGONG
                                                 </h2>
                                             </div>
                                         </div>
@@ -91,13 +133,13 @@ function SignupPage() {
                                                     <input
                                                         type="text"
                                                         class="form-control border"
-                                                        id="FirstName"
-                                                        name="firstName"
-                                                        value={formData.firstName}
+                                                        id="first_name"
+                                                        name="first_name"
+                                                        value={formData.first_name}
                                                         onChange={handleInputChange}
                                                         placeholder="John"
                                                     />
-                                                    {errors.firstName && <div className="text-danger">{errors.firstName}</div>}
+                                                    {errors.first_name && <div className="text-danger">{errors.first_name}</div>}
 
                                                 </div>
 
@@ -106,13 +148,13 @@ function SignupPage() {
                                                     <input
                                                         type="text"
                                                         class="form-control border"
-                                                        id="LastName"
-                                                        name="lastName"
-                                                        value={formData.lastName}
+                                                        id="last_name"
+                                                        name="last_name"
+                                                        value={formData.last_name}
                                                         onChange={handleInputChange}
                                                         placeholder="Doe"
                                                     />
-                                                    {errors.lastName && <div className="text-danger">{errors.lastName}</div>}
+                                                    {errors.last_name && <div className="text-danger">{errors.last_name}</div>}
 
                                                 </div>
                                                 <div class="form-outline mb-4">
@@ -134,41 +176,51 @@ function SignupPage() {
                                                     <input
                                                         type="text"
                                                         class="form-control border"
-                                                        id="studentID"
-                                                        name="studentID"
-                                                        value={formData.studentID}
+                                                        id="id"
+                                                        name="id"
+                                                        value={formData.id}
                                                         onChange={handleInputChange}
                                                         placeholder="EM167543"
                                                     />
-                                                    {errors.studentID && <div className="text-danger">{errors.studentID}</div>}
+                                                    {errors.id && <div className="text-danger">{errors.id}</div>}
 
                                                 </div>
                                                 <div class="form-outline mb-4">
                                                     <label for="exampleCpassword" class="form-label"  >Password</label>
-                                                    <input
-                                                        type="password"
-                                                        class="form-control border"
-                                                        id="password"
-                                                        name="password"
-                                                        placeholder='**************'
-                                                        value={formData.password}
-                                                        onChange={handleInputChange}
-                                                    />
+                                                    <div className="password-input-container d-flex align-items-center">
+                                                        <input
+                                                            type={showPassword ? 'text' : 'password'}
+                                                            class="form-control border"
+                                                            id="password"
+                                                            name="password"
+                                                            placeholder='**************'
+                                                            value={formData.password}
+                                                            onChange={handleInputChange}
+                                                        />
+                                                        <div className="password-icon" onClick={togglePasswordVisibility} style={{ marginLeft: "-25px", marginBottom: "10px", flex: 1 }}>
+                                                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                                        </div>
+                                                    </div>
                                                     {errors.password && <div className="text-danger">{errors.password}</div>}
 
                                                 </div>
 
                                                 <div class="form-outline mb-4">
                                                     <label for="exampleInputEmail1" class="form-label fs-6"  >Confirm Password</label>
-                                                    <input
-                                                        type="password"
-                                                        class="form-control border"
-                                                        placeholder='**************'
-                                                        id="confirmPassword"
-                                                        name="confirmPassword"
-                                                        value={formData.confirmPassword}
-                                                        onChange={handleInputChange}
-                                                    />
+                                                    <div className="password-input-container d-flex align-items-center">
+                                                        <input
+                                                            type={showPassword2 ? 'text' : 'password'}
+                                                            class="form-control border"
+                                                            placeholder='**************'
+                                                            id="confirmPassword"
+                                                            name="confirmPassword"
+                                                            value={formData.confirmPassword}
+                                                            onChange={handleInputChange}
+                                                        />
+                                                        <div className="password-icon" onClick={toggleConfirmPasswordVisibility} style={{ marginLeft: "-25px", marginBottom: "10px", flex: 1 }}>
+                                                            {showPassword2 ? <FaEyeSlash /> : <FaEye />}
+                                                        </div>
+                                                    </div>
                                                     {errors.confirmPassword && <div className="text-danger">{errors.confirmPassword}</div>}
 
                                                 </div>
